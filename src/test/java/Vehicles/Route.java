@@ -7,11 +7,19 @@ public class Route {
 
     //---------------- GETTERS/SETTERS -----------------
 
-    public String getRouteName() { return routeName; }
+    public String getRouteName() {
+        return routeName;
+    }
 
-    public void setRouteName(String routeName) { this.routeName = routeName; }
+    public void setRouteName(String routeName) {
+        this.routeName = routeName;
+    }
 
-    public double getDistance() { return distance; }
+    public double getDistance() {
+        return distance;
+    }
 
-    public void setDistance(double distance) { this.distance = distance; }
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
 }
