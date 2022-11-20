@@ -7,8 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.xml.soap.Text;
-import java.sql.SQLOutput;
 import java.time.Duration;
 import java.util.List;
 
@@ -21,11 +19,16 @@ public class Amazon {
     private final By MENU_RATINGS_COUNT = By.xpath("//span[@class ='a-size-mini a-color-tertiary']");
     private final By BOOKPAGE_RATINGS_COUNT = By.id("acrCustomerReviewText");
 
+    private final By MENU_STARS_COUNT = By.xpath("//i[contains(@class, 'a-star-mini')]");
+//    private final By BOOKPAGE_STARS_COUNT = By.xpath("//span[@id= 'acrPopover']");//strong count of stars
+    private final By BOOKPAGE_STARS_COUNT = By.xpath("//span[(@class= 'a-icon-alt')]/parent::i");
 
     String ratingsInMenu;
     String ratingsOnBookpage;
     String starsOnBookpage;
     String starsInMenu;
+    String starsInMenuShort;
+    String starsOnBookpageShort;
 
 
     @Test
@@ -49,24 +52,30 @@ public class Amazon {
         wait.until(ExpectedConditions.elementToBeClickable(PROCEED_TO_BOOKS));
         browser.findElement(PROCEED_TO_BOOKS).click();
 
-        //----------- Working with book Nr. 4 (in menu) --------------
+        //------------------ Working with book Nr. 4 (in menu) --------------
 
         List<WebElement> links = browser.findElements(BOOK_LINK);
         List<WebElement> menuRatings = browser.findElements(MENU_RATINGS_COUNT);
+        List<WebElement> menuStars = browser.findElements(MENU_STARS_COUNT);
+
 
         ratingsInMenu = (menuRatings.get(3).getText() + " ratings");
+        starsInMenu = (menuStars.get(3)).getAttribute("class");
+
+        links.get(3).click(); //click on book position. change it to check if the program works with stars and ratings
+
+        //----------- Working with book Nr. 4 (on Book's page) -------------
 
 
-        //----------- Working with book Nr. 4 (on Book's page) --------------
-
-        links.get(3).click();
         ratingsOnBookpage = browser.findElement(BOOKPAGE_RATINGS_COUNT).getText();
+        starsOnBookpage = (browser.findElement(BOOKPAGE_STARS_COUNT).getAttribute("class"));
 
 
+        //------------------ Ratings and stars print and  compare ---------
 
-        //----------- Ratings and stars print and  compare -----------
         System.out.println("Ratings in menu: " + ratingsInMenu);
         System.out.println("Ratings on book's page: " + ratingsOnBookpage);
+
         if (ratingsInMenu.equals(ratingsOnBookpage)) {
             System.out.println("Ratings are equal");
         }
@@ -74,8 +83,19 @@ public class Amazon {
             System.out.println("Ratings are different");
         }
 
+        System.out.println(" ");
 
+        starsInMenuShort = starsInMenu.substring(36);//end of class with stars to compare
+        System.out.println("Stars in menu: "+ starsInMenuShort);
+        starsOnBookpageShort = starsOnBookpage.substring(26);//end of class with stars to compare
+        System.out.println("Stars on book's page: " + starsOnBookpageShort);
 
+        if (starsInMenuShort.equals(starsOnBookpageShort)) {
+            System.out.println("Star counts are equal");
+        }
+        else {
+            System.out.println("Star counts are different");
+        }
 
 
     }
