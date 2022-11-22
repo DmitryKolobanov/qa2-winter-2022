@@ -72,7 +72,7 @@ public class Amazon {
         ratingsInMenuFull = (ratingsInMenu + " ratings");
         starsInMenu = (menuStars.get(3)).getAttribute("class");
 
-        links.get(4).click(); //click on book position. change it to check if the program works with stars and ratings
+        links.get(3).click(); //click on book position. change it to check if the program works with stars and ratings
 
         //----------- Working with book Nr. 4 (on Book's page) -------------
 
