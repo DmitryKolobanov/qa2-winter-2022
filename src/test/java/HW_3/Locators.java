@@ -46,7 +46,7 @@ public class Locators {
         //--------- Page 3 -----------
 
         By.xpath("//div[@class = 'lds-ellipsis v2']");  // three rotating circles
-        By.xpath("//div[text() = 'We are currently searching . . .']");  //text
-        By.xpath("//div[contains(text(), '500 car rental companies!')]");  //text
+        By.xpath("//div[contains(@class, 'mb-8 text-24')]");  //We are currently searching . . .
+        By.xpath("//div[@class = 'mb-24 text-center']");  //. . . for the best available offers among 500 car rental companies!
     }
 }
