@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class Locators {
 
     @Test
-    public void LocatorsSearch () {
+    public void LocatorsSearch() {
         System.setProperty("webdriver.chrome.driver", "C://QA2/chromedriver.exe");
         WebDriver browser = new ChromeDriver();
         browser.get("http:///www.discovercars.com/");
@@ -43,5 +43,10 @@ public class Locators {
         By.xpath("//label[(@for ='fuel-type-ft-V') and (text()= 'Gasoline')]"); //"Gasoline" (no idea how to separate price)
         By.xpath("//label[@for= 'number-of-seats-seats-4']");       //4 seats
 
+        //--------- Page 3 -----------
+
+        By.xpath("//div[@class = 'lds-ellipsis v2']");  // three rotating circles
+        By.xpath("//div[text() = 'We are currently searching . . .']");  //text
+        By.xpath("//div[contains(text(), '500 car rental companies!')]");  //text
     }
 }
