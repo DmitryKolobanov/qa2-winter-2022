@@ -16,12 +16,12 @@ public class Amazon {
     private final By NO_ADDRESS_CHANGE = By.xpath(".//input[@data-action-type = 'DISMISS']");
     private final By MAIN_MENU_LIST_ITEM = By.xpath(".//a[@data-csa-c-content-id  = 'nav_cs_bestsellers']");
     private final By PROCEED_TO_ITEMS = By.xpath("//div[@role='treeitem']/a[contains(@href, 'bestsellers/books')]");
-    private final By BOOK_LINK = By.xpath(".//a[@class= 'a-link-normal octopus-pc-item-link']");
-    private final By MENU_RATINGS_COUNT = By.xpath(".//span[@class ='a-size-mini a-color-tertiary']");
-    private final By BOOKPAGE_RATINGS_COUNT = By.id("acrCustomerReviewText");
-    private final By PROCEED_TO_RATINGS = By.xpath(".//div[@id= 'reviews-medley-footer']/div[(@class= 'a-row a-spacing-medium')]/a");
-    private final By MENU_STARS_COUNT = By.xpath(".//i[contains(@class, 'a-star-mini')]");
-    private final By BOOKPAGE_STARS_COUNT = By.xpath(".//span[(@class= 'a-icon-alt')]/parent::i");
+    private final By ITEM_LINK = By.xpath(".//div[@class= 'p13n-sc-uncoverable-faceout']/a[@class = 'a-link-normal']");
+    private final By MENU_RATINGS_COUNT = By.xpath(".//span[@class = 'a-size-small']");//getText + need to add " ratings"
+    private final By MENU_STARS_COUNT = By.xpath(".//div[@class = 'a-icon-row']/a");
+    private final By BOOKPAGE_RATINGS_COUNT = By.xpath(".//span[@id = 'acrCustomerReviewText']");
+    private final By BOOKPAGE_STARS_COUNT = By.xpath("//span[@id= 'acrPopover']");
+    private final By PROCEED_TO_REVIEWS = By.xpath(".//a[@data-hook = 'see-all-reviews-link-foot']");
     private final By REVIEWS_COUNT_DISPLAYED = By.xpath(".//div[@id= 'filter-info-section']/div");
     private final By EVERY_REVIEW_BLOCK = By.xpath(".//div[contains(@id,  '-review-card')]");
     private final By NEXT_PAGE_LINK = By.xpath(".//li[@class = 'a-last']/a");
@@ -32,8 +32,6 @@ public class Amazon {
     String ratingsOnBookpage;
     String starsOnBookpage;
     String starsInMenu;
-    String starsInMenuShort;
-    String starsOnBookpageShort;
     String reviewsOnReviewPage;
     String ratingsInMenuFull;
     String reviewsDisplayedToPrint;
@@ -63,22 +61,22 @@ public class Amazon {
 
         //------------------ Working with book Nr. 4 (in menu) --------------
 
-        List<WebElement> links = browser.findElements(BOOK_LINK);
         List<WebElement> menuRatings = browser.findElements(MENU_RATINGS_COUNT);
         List<WebElement> menuStars = browser.findElements(MENU_STARS_COUNT);
 
-
         ratingsInMenu = (menuRatings.get(3).getText());
         ratingsInMenuFull = (ratingsInMenu + " ratings");
-        starsInMenu = (menuStars.get(3)).getAttribute("class");
+        starsInMenu = (menuStars.get(3).getAttribute("title"));
 
-        links.get(3).click(); //click on book position. change it to check if the program works with stars and ratings
+        List<WebElement> itemlinks = browser.findElements(ITEM_LINK);
+        itemlinks.get(7).click();       //7 - because of 2 links per item
+
 
         //----------- Working with book Nr. 4 (on Book's page) -------------
 
 
         ratingsOnBookpage = browser.findElement(BOOKPAGE_RATINGS_COUNT).getText();
-        starsOnBookpage = (browser.findElement(BOOKPAGE_STARS_COUNT).getAttribute("class"));
+        starsOnBookpage = (browser.findElement(BOOKPAGE_STARS_COUNT).getAttribute("title"));
 
 
         //------------------ Ratings and stars print and  compare ---------
@@ -86,7 +84,7 @@ public class Amazon {
         System.out.println("Ratings in menu: " + ratingsInMenuFull);
         System.out.println("Ratings on book's page: " + ratingsOnBookpage);
 
-        if (ratingsInMenu.equals(ratingsOnBookpage)) {
+        if (ratingsInMenuFull.equals(ratingsOnBookpage)) {
             System.out.println("Ratings are equal");
         } else {
             System.out.println("Ratings are different");
@@ -94,12 +92,10 @@ public class Amazon {
 
         System.out.println(" ");
 
-        starsInMenuShort = starsInMenu.substring(36);//end of class with stars to compare
-        System.out.println("Stars in menu: " + starsInMenuShort);
-        starsOnBookpageShort = starsOnBookpage.substring(26);//end of class with stars to compare
-        System.out.println("Stars on book's page: " + starsOnBookpageShort);
+        System.out.println("Stars in menu: " + starsInMenu);
+        System.out.println("Stars on book's page: " + starsOnBookpage);
 
-        if (starsInMenuShort.equals(starsOnBookpageShort)) {
+        if (starsInMenu.equals(starsOnBookpage)) {
             System.out.println("Star counts are equal");
         } else {
             System.out.println("Star counts are different");
@@ -107,8 +103,8 @@ public class Amazon {
 
         //--------------- Reviews count and  compare ------------
 
-        wait.until(ExpectedConditions.elementToBeClickable(PROCEED_TO_RATINGS));
-        browser.findElement(PROCEED_TO_RATINGS).click();
+        wait.until(ExpectedConditions.elementToBeClickable(PROCEED_TO_REVIEWS));
+        browser.findElement(PROCEED_TO_REVIEWS).click();
 
         reviewsOnReviewPage = browser.findElement(REVIEWS_COUNT_DISPLAYED).getText();//get reviews count displayed on page
 
