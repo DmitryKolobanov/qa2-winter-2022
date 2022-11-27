@@ -25,8 +25,8 @@ public class Amazon {
     private final By REVIEWS_COUNT_DISPLAYED = By.xpath(".//div[@id= 'filter-info-section']/div");
     private final By EVERY_REVIEW_BLOCK = By.xpath(".//div[contains(@id,  '-review-card')]");
     private final By NEXT_PAGE_LINK = By.xpath(".//li[@class = 'a-last']/a");
-    private final By NEXT_PAGE_AVAILABLE = By.xpath(".//li[@class = 'a-last']");
-    private final By NO_NEXT_PAGE_LINK = By.xpath(".//li[@class = 'a-disabled a-last']");
+//    private final By NEXT_PAGE_AVAILABLE = By.xpath(".//li[@class = 'a-last']");
+//    private final By NO_NEXT_PAGE_LINK = By.xpath(".//li[@class = 'a-disabled a-last']");
 
     String ratingsInMenu;
     String ratingsOnBookpage;
@@ -69,7 +69,7 @@ public class Amazon {
         starsInMenu = (menuStars.get(3).getAttribute("title"));
 
         List<WebElement> itemlinks = browser.findElements(ITEM_LINK);
-        itemlinks.get(7).click();       //7 - because of 2 links per item
+        itemlinks.get(7).click();       // 4 = 7 - because of 2 links per item
 
 
         //----------- Working with book Nr. 4 (on Book's page) -------------
@@ -111,18 +111,12 @@ public class Amazon {
         for (int i = 0; i < 100000; i++) {              //page change routine (max - 100000 pages)
             List<WebElement> reviewInList = browser.findElements(EVERY_REVIEW_BLOCK);
             for (WebElement we : reviewInList) {        //reviews counting on page routine
-
                 reviewsCounted = reviewsCounted + 1;
                 System.out.println(reviewsCounted);
-                System.out.println("");
             }
-            if (browser.findElements(NO_NEXT_PAGE_LINK).size() == 0) {          //check if last page
-                if (browser.findElements(NEXT_PAGE_AVAILABLE).size() != 0) {     //additional check for 10 reviews only
-                    wait.until(ExpectedConditions.elementToBeClickable(NEXT_PAGE_LINK));
-                    browser.findElement(NEXT_PAGE_LINK).click();
-                } else {
-                    break;
-                }
+            if (!browser.findElements(NEXT_PAGE_LINK).isEmpty()) {
+                wait.until(ExpectedConditions.elementToBeClickable(NEXT_PAGE_LINK));
+                browser.findElement(NEXT_PAGE_LINK).click();
             } else {
                 break;
             }
