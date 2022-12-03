@@ -1,5 +1,6 @@
 package HW_4;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -83,23 +84,13 @@ public class Amazon {
 
         System.out.println("Ratings in menu: " + ratingsInMenuFull);
         System.out.println("Ratings on book's page: " + ratingsOnBookpage);
-
-        if (ratingsInMenuFull.equals(ratingsOnBookpage)) {
-            System.out.println("Ratings are equal");
-        } else {
-            System.out.println("Ratings are different");
-        }
+        Assertions.assertEquals(ratingsInMenuFull, ratingsOnBookpage, "Ratings are different!");
 
         System.out.println(" ");
 
         System.out.println("Stars in menu: " + starsInMenu);
         System.out.println("Stars on book's page: " + starsOnBookpage);
-
-        if (starsInMenu.equals(starsOnBookpage)) {
-            System.out.println("Star counts are equal");
-        } else {
-            System.out.println("Star counts are different");
-        }
+        Assertions.assertEquals(starsInMenu, starsOnBookpage, "Star counts are different!");
 
         //--------------- Reviews count and  compare ------------
 
@@ -130,11 +121,8 @@ public class Amazon {
         System.out.println(" ");
         System.out.println("Reviews displayed: " + reviewsDisplayedToPrint);
         System.out.println("Reviews counted: " + reviewsCountedToPrint);
-        if (reviewsDisplayedToPrint.equals(reviewsCountedToPrint)) {
-            System.out.println("Reviews counts are equal");
-        } else {
-            System.out.println("Reviews counts are different");
-        }
+        Assertions.assertEquals(reviewsDisplayedToPrint, reviewsCountedToPrint, "Reviews counts are different!");
+
     }
 }
 
