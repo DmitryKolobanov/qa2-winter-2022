@@ -29,6 +29,8 @@ public class Airports {
     private final By CHILDREN = By.id("children");
     private final By BAG = By.id("bugs");
     private final By FLIGHT = By.id("flight");
+    private final By SEAT = By.xpath(".//div[@onclick  = 'seat(9)']");
+    private final By SEAT_BOOKED = By.xpath(".//div[@id  = 'book']//div[contains (text(), 'Your seat is')]");
 
     private WebDriver browser;
     private WebDriverWait wait;
@@ -39,6 +41,9 @@ public class Airports {
     String paxNameOnForm;
     String startPointOnForm;
     String endPointOnForm;
+    String paxNameToCompare;
+    String seatNumber;
+    String seatNumberBooked;
 
     @Test
     public void reservationCheck() {
@@ -54,6 +59,7 @@ public class Airports {
         startPoint = "RIX";
         endPoint = "SFO";
         paxName = "Vasya";
+        paxNameToCompare = paxName + "!";
 
 //---------------- Airports select ------------
 
@@ -84,19 +90,36 @@ public class Airports {
 
         browser.findElement(GET_PRICE_BTN).click();  //proceed to prices
 
-// ---------- Checking Airports and Name after perice calculated --------
+// ---------- Checking Airports and Name after price calculated --------
 
-//        List<WebElement> bookDataPriced = browser.findElements(DATA_AFTER_PRICES);
+        wait.until(ExpectedConditions.presenceOfElementLocated(DATA_AFTER_PRICES));
+        List<WebElement> bookDataPriced = browser.findElements(DATA_AFTER_PRICES);
 
-//        paxNameOnForm = bookDataPriced.get(0).getText();
-//        System.out.println(paxNameOnForm);
+        paxNameOnForm = (bookDataPriced.get(0).getText());
+        Assertions.assertEquals(paxNameToCompare, paxNameOnForm, "Pax name on form is not correct!");
 
+        startPointOnForm = (bookDataPriced.get(1).getText());
+        Assertions.assertEquals(startPointOnForm, startPoint, "Start point on form is not correct!");
 
+        endPointOnForm = (bookDataPriced.get(2).getText());
+        Assertions.assertEquals( endPointOnForm, endPoint, "End point on form is not correct!");
 
+        browser.findElement(BOOK_BTN).click();  //proceed to seats
 
+// ------------------------ Select seat ------------------------------
 
+        wait.until(ExpectedConditions.presenceOfElementLocated(SEAT));
+        seatNumber = browser.findElement(SEAT).getText();
+        System.out.println(seatNumber);
 
-//        browser.findElement(BOOK_BTN).click();
+// ------------------------ Seat check -------------------------------
+
+//        wait.until(ExpectedConditions.presenceOfElementLocated(SEAT_BOOKED));
+//        seatNumberBooked = browser.findElement(SEAT_BOOKED).getText().substring(14);
+//        System.out.println(seatNumberBooked);
+
+//        browser.findElement(BOOK_LAST_BTN).click();  //proceed to book
+
     }
 
     private void select(By locator, String value)  {
