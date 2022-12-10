@@ -1,8 +1,10 @@
 package HW_5;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,6 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Airports {
     private final By FROM = By.id("afrom");
@@ -30,11 +34,12 @@ public class Airports {
     private final By BAG = By.id("bugs");
     private final By FLIGHT = By.id("flight");
     private final By SEAT = By.xpath(".//div[@onclick  = 'seat(9)']");
-    private final By SEAT_BOOKED = By.xpath(".//div[@id  = 'book']//div[contains (text(), 'Your seat is')]");
+    private final By SEAT_BOOKED = By.xpath(".//div[@id  = 'book']//div[@class = 'line']");
+    private final By RESERVATION_COMPLETED = By.xpath(".//div[@class = 'finalTxt']");
+    private final By RESPONSE = By.id("response");
 
     private WebDriver browser;
     private WebDriverWait wait;
-    String name;
     String startPoint;
     String endPoint;
     String paxName;
@@ -44,6 +49,7 @@ public class Airports {
     String paxNameToCompare;
     String seatNumber;
     String seatNumberBooked;
+    String priceString;
 
     @Test
     public void reservationCheck() {
@@ -102,35 +108,59 @@ public class Airports {
         Assertions.assertEquals(startPointOnForm, startPoint, "Start point on form is not correct!");
 
         endPointOnForm = (bookDataPriced.get(2).getText());
-        Assertions.assertEquals( endPointOnForm, endPoint, "End point on form is not correct!");
+        Assertions.assertEquals(endPointOnForm, endPoint, "End point on form is not correct!");
 
-        browser.findElement(BOOK_BTN).click();  //proceed to seats
+        priceString = browser.findElement(RESPONSE).getText();
+
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(priceString);
+        while(m.find()) {
+            System.out.println(m.group());
+        }
+        System.out.println(priceString);
+
+
+            browser.findElement(BOOK_BTN).click();  //proceed to seats
 
 // ------------------------ Select seat ------------------------------
 
         wait.until(ExpectedConditions.presenceOfElementLocated(SEAT));
         seatNumber = browser.findElement(SEAT).getText();
-        System.out.println(seatNumber);
+        browser.findElement(SEAT).click();  //selecting seat
 
 // ------------------------ Seat check -------------------------------
 
-//        wait.until(ExpectedConditions.presenceOfElementLocated(SEAT_BOOKED));
-//        seatNumberBooked = browser.findElement(SEAT_BOOKED).getText().substring(14);
-//        System.out.println(seatNumberBooked);
+        wait.until(ExpectedConditions.presenceOfElementLocated(SEAT_BOOKED));
+        seatNumberBooked = browser.findElement(SEAT_BOOKED).getText().substring(14);
+        Assertions.assertEquals(seatNumberBooked, seatNumber, "Booked seat number is not correct!");
 
-//        browser.findElement(BOOK_LAST_BTN).click();  //proceed to book
+//---------------- Check if booking is successful --------------------
 
+        wait.until(ExpectedConditions.presenceOfElementLocated(BOOK_LAST_BTN));
+        browser.findElement(BOOK_LAST_BTN).click();  //proceed to book
+
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(RESERVATION_COMPLETED));
+            System.out.println("Reservation is successful. All tests passed!");
+        } catch (TimeoutException e) {
+            System.out.println("No confirmation message displayed. Test is not passed!");
+        }
     }
 
-    private void select(By locator, String value)  {
+    private void select(By locator, String value) {
         WebElement we = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         Select select = new Select(we);
         select.selectByValue(value);
     }
 
-    private void type (By locator, String text) {
+    private void type(By locator, String text) {
         WebElement input = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         input.clear();
         input.sendKeys(text);
+    }
+
+    @AfterEach
+    public void closeBrowser() {
+        browser.close();
     }
 }
