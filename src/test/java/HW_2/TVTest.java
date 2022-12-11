@@ -1,3 +1,5 @@
+package HW_2;
+
 import org.junit.jupiter.api.Test;
 
 public class TVTest {
@@ -11,7 +13,7 @@ public class TVTest {
         testTV.setPrice(550);
         testTV.setLeasingAvailable(true);
 
-        System.out.println("Object: TV");
+        System.out.println("Object: HW_2.TV");
         System.out.println(("Manufacturer: ") + (testTV.getManufacturer()));
         System.out.println(("Screen Diagonal: ") + (testTV.getDiagonal()));
         System.out.println(("Plasma Screen: ") + (testTV.isPlasma()));

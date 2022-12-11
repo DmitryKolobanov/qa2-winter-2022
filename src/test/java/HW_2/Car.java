@@ -1,3 +1,5 @@
+package HW_2;
+
 public class Car {
     //---------------------ATTRIBUTES--------------------
     private String manufacturer;

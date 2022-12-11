@@ -1,3 +1,5 @@
+package HW_2;
+
 public class Notebook {
     //---------------------ATTRIBUTES--------------------
     private String manufacturer;
