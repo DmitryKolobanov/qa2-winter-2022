@@ -117,13 +117,12 @@ public class Airports {
 
         Pattern p = Pattern.compile("\\d+");
         Matcher m = p.matcher(priceString);
+
+        boolean isPriceFound = false;
         while (m.find()) {
-            priceChecker = priceChecker + 1;     // if digit block found
+            isPriceFound = true;
         }
-        if (priceChecker > 1) {                 // in case, if Reservation Nr. contains digits
-            priceChecker = 1;
-        }
-        Assertions.assertEquals(1, priceChecker, "No price set!");
+        Assertions.assertTrue(isPriceFound, "No price set!");
 
         browser.findElement(BOOK_BTN).click();  //proceed to seats
 
