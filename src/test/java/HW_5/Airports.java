@@ -72,6 +72,7 @@ public class Airports {
         select(FROM, startPoint);        //вызов метода select с передачей в него параметров
         select(TO, endPoint);
 
+        wait.until(ExpectedConditions.elementToBeClickable(GO_BTN));
         browser.findElement(GO_BTN).click();        //proceed to form
 
 //--------------- Checking Airports on Form --------------
@@ -94,6 +95,7 @@ public class Airports {
         type(BAG, "1");
         select(FLIGHT, "13");
 
+        wait.until(ExpectedConditions.elementToBeClickable(GET_PRICE_BTN));
         browser.findElement(GET_PRICE_BTN).click();  //proceed to prices
 
 // ---------- Checking Airports and Name after price calculated --------
@@ -123,6 +125,7 @@ public class Airports {
         }
         Assertions.assertTrue(isPriceFound, "No price set!");
 
+        wait.until(ExpectedConditions.elementToBeClickable(BOOK_BTN));
         browser.findElement(BOOK_BTN).click();  //proceed to seats
 
 // ------------------------ Select seat ------------------------------
@@ -139,11 +142,11 @@ public class Airports {
 
 //---------------- Check if booking is successful --------------------
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(BOOK_LAST_BTN));
+        wait.until(ExpectedConditions.elementToBeClickable(BOOK_LAST_BTN));
         browser.findElement(BOOK_LAST_BTN).click();  //proceed to book
 
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(RESERVATION_COMPLETED));
+            wait.until(ExpectedConditions.presenceOfElementLocated(RESERVATION_COMPLETED));
             System.out.println("Reservation is successful. All tests passed!");
         } catch (TimeoutException e) {
             System.out.println("No confirmation message displayed. Test is not passed!");
@@ -162,8 +165,8 @@ public class Airports {
         input.sendKeys(text);
     }
 
-//    @AfterEach
-//    public void closeBrowser() {
-//        browser.close();
-//    }
+    @AfterEach
+    public void closeBrowser() {
+        browser.close();
+    }
 }
