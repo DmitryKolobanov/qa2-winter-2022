@@ -30,7 +30,7 @@ public class Locators {
 
         By.xpath(".//div[@data-event-label= 'Small cars']");  //Small Cars
         By.xpath(".//div[@class= 'car-top-filter-control next']");   //Btn Right
-        By.xpath(".//span[@class= 'showing-cars']");     //Car count
+        By.xpath(".//span[@class= 'showing-cars']");     //HW_2.Car count
         By.xpath(".//a[contains (@class, 'dc-ui ')]");  // Sort by Price
         By.xpath(".//span[text()= '1 bag']");// 'All cars with 1 Bag (43)'
         By.xpath(".//a[contains (@class, 'btn-book')]"); // "View" btn for all (291) cars
