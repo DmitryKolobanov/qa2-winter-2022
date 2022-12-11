@@ -118,7 +118,7 @@ public class Airports {
         Matcher m = p.matcher(priceString);
 
         boolean isPriceFound = false;
-        while (m.find()) {
+        if (m.find()) {                             //only first match needed
             isPriceFound = true;
         }
         Assertions.assertTrue(isPriceFound, "No price set!");
