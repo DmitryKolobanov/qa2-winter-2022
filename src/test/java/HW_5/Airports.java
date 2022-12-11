@@ -50,6 +50,7 @@ public class Airports {
     String seatNumber;
     String seatNumberBooked;
     String priceString;
+    int priceChecker;
 
     @Test
     public void reservationCheck() {
@@ -64,7 +65,7 @@ public class Airports {
 
         startPoint = "RIX";
         endPoint = "SFO";
-        paxName = "Vasya";
+        paxName = "Vasja";
         paxNameToCompare = paxName + "!";
 
 //---------------- Airports select ------------
@@ -110,17 +111,21 @@ public class Airports {
         endPointOnForm = (bookDataPriced.get(2).getText());
         Assertions.assertEquals(endPointOnForm, endPoint, "End point on form is not correct!");
 
+// -------------------- Set price check -----------------
+
         priceString = browser.findElement(RESPONSE).getText();
 
         Pattern p = Pattern.compile("\\d+");
         Matcher m = p.matcher(priceString);
-        while(m.find()) {
-            System.out.println(m.group());
+        while (m.find()) {
+            priceChecker = priceChecker + 1;     // if digit block found
         }
-        System.out.println(priceString);
+        if (priceChecker > 1) {                 // in case, if Reservation Nr. contains digits
+            priceChecker = 1;
+        }
+        Assertions.assertEquals(1, priceChecker, "No price set!");
 
-
-            browser.findElement(BOOK_BTN).click();  //proceed to seats
+        browser.findElement(BOOK_BTN).click();  //proceed to seats
 
 // ------------------------ Select seat ------------------------------
 
@@ -159,8 +164,8 @@ public class Airports {
         input.sendKeys(text);
     }
 
-    @AfterEach
-    public void closeBrowser() {
-        browser.close();
-    }
+//    @AfterEach
+//    public void closeBrowser() {
+//        browser.close();
+//    }
 }
