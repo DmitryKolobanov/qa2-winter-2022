@@ -50,7 +50,6 @@ public class Airports {
     String seatNumber;
     String seatNumberBooked;
     String priceString;
-    int priceChecker;
 
     @Test
     public void reservationCheck() {
