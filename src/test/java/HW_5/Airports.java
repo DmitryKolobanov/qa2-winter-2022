@@ -69,7 +69,7 @@ public class Airports {
 
 //---------------- Airports select ------------
 
-        select(FROM, startPoint);        //вызов метода select с передачей в него параметров
+        select(FROM, startPoint);
         select(TO, endPoint);
 
         wait.until(ExpectedConditions.elementToBeClickable(GO_BTN));
@@ -87,7 +87,7 @@ public class Airports {
 
 //-------------- Filling book form ----------------
 
-        type(FIRST_NAME, paxName);     //вызов метода type с заполнением полей
+        type(FIRST_NAME, paxName);
         type(LAST_NAME, "Kolobok");
         type(DISCOUNT, "Hacker");
         type(ADULTS, "3");
