@@ -9,7 +9,7 @@ public class Passenger {
     private int bagCount;
     private String date;
 
-    public Passenger(String firstName, String lastName, String discount, int peopleCount, int childCount, int bagCount, String date) {
+    public Passenger (String firstName, String lastName, String discount, int peopleCount, int childCount, int bagCount, String date) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.discount = discount;
