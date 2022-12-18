@@ -2,6 +2,7 @@ package AirportsPages;
 
 import AirportsPages.pages.HomePage;
 import AirportsPages.pages.PassengerInfo;
+import AirportsPages.pages.SeatSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -27,15 +28,25 @@ public class RegistrationTestsOnPages {
         PassengerInfo infoPage = new PassengerInfo(baseFunc);
         infoPage.fillInPassengerInfo(passenger);
 
-        Assertions.assertEquals(passenger.getFirstName(), infoPage.getPassengerName(), "Wrong name!");
-        Assertions.assertEquals(FROM_AIRPORT, infoPage.getFirstFromAirport(), "Error msg!");
-        Assertions.assertEquals(FROM_AIRPORT, infoPage.getSecondFromAirport(), "Error msg!");
-        Assertions.assertEquals(TO_AIRPORT, infoPage.getFirstToAirport(), "Error msg!");
-        Assertions.assertEquals(TO_AIRPORT, infoPage.getSecondToAirport(), "Error msg!");
+        Assertions.assertEquals(passenger.getFirstName(), infoPage.getPassengerName(), "Wrong passenger name!");
+        Assertions.assertEquals(FROM_AIRPORT, infoPage.getFirstFromAirport(), "Incorrect FROM airport before " +
+                "pax form filled!");
+        Assertions.assertEquals(FROM_AIRPORT, infoPage.getSecondFromAirport(), "Incorrect FROM airport after" +
+                "'Get Price' pressed!");
+        Assertions.assertEquals(TO_AIRPORT, infoPage.getFirstToAirport(), "Incorrect TO airport before pax" +
+                "form filled!");
+        Assertions.assertEquals(TO_AIRPORT, infoPage.getSecondToAirport(), "Incorrect TO airport after 'Get" +
+                " Price' pressed!");
 
-        Assertions.assertTrue(infoPage.getPrice().length() > 0, "Error message!");
+        Assertions.assertTrue(infoPage.getPrice().length() > 0, "No price received!");
 
         baseFunc.click(BOOK_BTN);
 
+        SeatSelect seatSelect = new SeatSelect(baseFunc);
+        System.out.println(seatSelect.getSeatNumber());
+        seatSelect.clickSelectedSeat();
+        System.out.println(seatSelect.getSelectedSeat());
+        Assertions.assertEquals(seatSelect.getSeatNumber(), seatSelect.getSelectedSeat(), "Seat numbers are " +
+                "different!");
     }
 }
