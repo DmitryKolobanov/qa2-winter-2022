@@ -1,11 +1,15 @@
 package AirportsPages;
 
+import AirportsPages.pages.ConfirmPage;
 import AirportsPages.pages.HomePage;
 import AirportsPages.pages.PassengerInfo;
 import AirportsPages.pages.SeatSelect;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pageobject.model.Passenger;
 
 public class RegistrationTestsOnPages {
@@ -13,6 +17,8 @@ public class RegistrationTestsOnPages {
     private final String FROM_AIRPORT = "RIX";
     private final String TO_AIRPORT = "SFO";
     private final By BOOK_BTN = By.id("book2");
+    private final By BOOK_LAST_BTN = By.id("book3");
+    String seatNumber;
 
     private BaseFunc baseFunc = new BaseFunc();
 
@@ -40,13 +46,26 @@ public class RegistrationTestsOnPages {
 
         Assertions.assertTrue(infoPage.getPrice().length() > 0, "No price received!");
 
-        baseFunc.click(BOOK_BTN);
+        baseFunc.click(BOOK_BTN);                   //proceed to seat select
 
         SeatSelect seatSelect = new SeatSelect(baseFunc);
-        System.out.println(seatSelect.getSeatNumber());
+        seatNumber = seatSelect.getSeatNumber();
         seatSelect.clickSelectedSeat();
-        System.out.println(seatSelect.getSelectedSeat());
-        Assertions.assertEquals(seatSelect.getSeatNumber(), seatSelect.getSelectedSeat(), "Seat numbers are " +
+        Assertions.assertEquals(seatNumber, seatSelect.getSelectedSeat(), "Seat numbers are " +
                 "different!");
+
+        baseFunc.click(BOOK_LAST_BTN);              //proceed to final page
+
+        ConfirmPage confirmPage = new ConfirmPage(baseFunc);
+        try {
+           confirmPage.confirmationAccept();
+            System.out.println("Reservation is successful. All tests passed!");
+        } catch (TimeoutException e) {
+            System.out.println("No confirmation message displayed. Test is not passed!");
+        }
+    }
+    @AfterEach
+    public void closeBrowser() {
+        baseFunc.closeBrowser();
     }
 }

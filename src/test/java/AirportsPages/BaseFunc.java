@@ -20,7 +20,7 @@ public class BaseFunc {
         browser = new ChromeDriver();
         browser.manage().window().maximize();
 
-        wait = new WebDriverWait(browser, Duration.ofSeconds(5));
+        wait = new WebDriverWait(browser, Duration.ofSeconds(10));
     }
 
     public void openUrl(String url)  {
@@ -66,5 +66,9 @@ public class BaseFunc {
 
     public void waitForElementsCountToBe(By locator, int count) {
         wait.until(ExpectedConditions.numberOfElementsToBe(locator, count));
+    }
+
+    public void closeBrowser() {
+        browser.close();
     }
 }
