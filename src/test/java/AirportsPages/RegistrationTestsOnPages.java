@@ -18,13 +18,14 @@ public class RegistrationTestsOnPages {
     private final String TO_AIRPORT = "SFO";
     private final By BOOK_BTN = By.id("book2");
     private final By BOOK_LAST_BTN = By.id("book3");
+
     String seatNumber;
 
     private BaseFunc baseFunc = new BaseFunc();
 
     @Test
     public void successfulRegistrationTest() {
-        Passenger passenger = new Passenger("Dima","Kolobok", "Hacker", 2,
+        Passenger passenger = new Passenger("Dima", "Kolobok", "Hacker", 2,
                 1, 2, "12-05-2018");
 
         baseFunc.openUrl(URL);
@@ -57,8 +58,9 @@ public class RegistrationTestsOnPages {
         baseFunc.click(BOOK_LAST_BTN);              //proceed to final page
 
         ConfirmPage confirmPage = new ConfirmPage(baseFunc);
+
         try {
-           confirmPage.confirmationAccept();
+            confirmPage.confirmationAccept();
             System.out.println("Reservation is successful. All tests passed!");
         } catch (TimeoutException e) {
             System.out.println("No confirmation message displayed. Test is not passed!");

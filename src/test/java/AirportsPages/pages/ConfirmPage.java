@@ -2,6 +2,7 @@ package AirportsPages.pages;
 
 import AirportsPages.BaseFunc;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 
 public class ConfirmPage {
 
@@ -12,7 +13,8 @@ public class ConfirmPage {
     public ConfirmPage(BaseFunc baseFunc) {
         this.baseFunc = baseFunc;
     }
+
     public void confirmationAccept() {
-        baseFunc.findElement(RESERVATION_COMPLETED);
+            baseFunc.findElement(RESERVATION_COMPLETED);
     }
 }
