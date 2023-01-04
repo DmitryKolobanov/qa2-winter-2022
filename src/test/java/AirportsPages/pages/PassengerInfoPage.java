@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import pageobject.model.Passenger;
 
-public class PassengerInfo {
+public class PassengerInfoPage {
     private final By FIRST_NAME = By.id("name");
     private final By LAST_NAME = By.id("surname");
     private final By DISCOUNT = By.id("discount");
@@ -16,9 +16,10 @@ public class PassengerInfo {
     private final By GET_PRICE_BTN = By.xpath(".//span[@onclick = 'setLang();']");
     private final By DATA_ON_FORM = By.xpath(".//span[@class = 'bTxt']");
     private final By RESPONSE = By.id("response");
+    private final By BOOK_BTN = By.id("book2");
     private BaseFunc baseFunc;
 
-    public PassengerInfo(BaseFunc baseFunc) {
+    public PassengerInfoPage(BaseFunc baseFunc) {
         this.baseFunc = baseFunc;
     }
     public void fillInPassengerInfo(Passenger passenger)   {
@@ -56,5 +57,8 @@ public class PassengerInfo {
     public String getPrice() {
         String text = baseFunc.findElement(RESPONSE).getText();
         return StringUtils.substringBetween(text, "for ", " EUR");
+    }
+    public void clickSBookBtn() {
+        baseFunc.click(BOOK_BTN);
     }
 }
