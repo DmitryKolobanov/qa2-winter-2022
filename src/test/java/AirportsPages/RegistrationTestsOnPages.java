@@ -56,15 +56,10 @@ public class RegistrationTestsOnPages {
 
         seatSelectPage.clickLastBook();              //proceed to final page
 
-
         ConfirmPage confirmPage = new ConfirmPage(baseFunc);
+        Assertions.assertTrue(confirmPage.isConfirmationPageLoaded(),  "Page not found!");
+        Assertions.assertTrue(confirmPage.isConfirmationAccept(), "Wrong registration text");
 
-        try {
-            confirmPage.confirmationAccept();
-            System.out.println("Reservation is successful. All tests passed!");
-        } catch (TimeoutException e) {
-            System.out.println("No confirmation message displayed. Test is not passed!");
-        }
     }
     @AfterEach
     public void closeBrowser() {
