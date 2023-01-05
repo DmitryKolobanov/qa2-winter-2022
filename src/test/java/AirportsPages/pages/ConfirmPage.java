@@ -17,7 +17,7 @@ public class ConfirmPage {
     }
 
     public boolean isConfirmationPageLoaded() {
-        boolean isPageLoaded = true;
+        boolean isPageLoaded;
         try {
             baseFunc.findElement(RESERVATION_COMPLETED);
             return isPageLoaded = true;
@@ -26,7 +26,7 @@ public class ConfirmPage {
         }
     }
 
-    public boolean isConfirmationAccept() {
+    public boolean isConfirmationAccepted() {
         String confirmationText = baseFunc.findElement(RESERVATION_COMPLETED).getText();
         return confirmationText.equals(confirmPageText);
     }

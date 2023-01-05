@@ -58,7 +58,7 @@ public class RegistrationTestsOnPages {
 
         ConfirmPage confirmPage = new ConfirmPage(baseFunc);
         Assertions.assertTrue(confirmPage.isConfirmationPageLoaded(),  "Page not found!");
-        Assertions.assertTrue(confirmPage.isConfirmationAccept(), "Wrong registration text");
+        Assertions.assertTrue(confirmPage.isConfirmationAccepted(), "Wrong registration text");
 
     }
     @AfterEach
