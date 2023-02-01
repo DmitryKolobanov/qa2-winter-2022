@@ -4,18 +4,17 @@ import io.cucumber.core.internal.com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class Alerts {
+public class Alert {
 
     @JsonProperty("sender_name")
     private String senderName;
 
     private String event;
-//    private String event;
     private long start;
     private long end;
     private String description;
 
-    private List<Tags> tags;
+    private List<String> tags;
 
 //    getters and setters
 
@@ -60,11 +59,11 @@ public class Alerts {
         this.description = description;
     }
 
-    public List<Tags> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tags> tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 }
