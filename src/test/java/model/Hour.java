@@ -30,7 +30,7 @@ public class Hour {
     @JsonProperty("wind_gust")
     private double windGust;
 
-    private List<Weather> weather;
+    private List<Weather> weathers;
 
     private double pop;
 
@@ -133,11 +133,11 @@ public class Hour {
     }
 
     public List<Weather> getWeather() {
-        return weather;
+        return weathers;
     }
 
-    public void setWeather(List<Weather> weather) {
-        this.weather = weather;
+    public void setWeather(List<Weather> weathers) {
+        this.weathers = weathers;
     }
 
     public double getPop() {
