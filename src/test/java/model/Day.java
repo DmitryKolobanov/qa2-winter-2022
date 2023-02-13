@@ -16,6 +16,7 @@ public class Day {
     private double moonPhase;
 
     private Temp temp;
+    @JsonProperty("feels_like")
     private FeelsLike feelsLike;
 
     private int pressure;
