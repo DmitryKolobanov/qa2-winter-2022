@@ -1,4 +1,4 @@
-package HW_3;
+package hw3;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
