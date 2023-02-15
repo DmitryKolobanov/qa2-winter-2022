@@ -1,4 +1,4 @@
-package HW_2;
+package hw2;
 
 public class TV {
     //---------------------ATTRIBUTES--------------------
