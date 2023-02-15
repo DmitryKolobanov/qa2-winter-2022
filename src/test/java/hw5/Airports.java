@@ -1,4 +1,4 @@
-package HW_5;
+package hw5;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -56,7 +56,7 @@ public class Airports {
         System.setProperty("webdriver.chrome.driver", "C://QA2/chromedriver.exe");
         browser = new ChromeDriver();
         browser.manage().window().maximize();
-        browser.get("http://www.qaguru.lv:8089/tickets//");
+        browser.get("http://www.qaguru.lv:8089/tickets/");
 
         wait = new WebDriverWait(browser, Duration.ofSeconds(10));
 
