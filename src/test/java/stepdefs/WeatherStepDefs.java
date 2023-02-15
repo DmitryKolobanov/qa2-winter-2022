@@ -121,7 +121,6 @@ public class WeatherStepDefs {
         convert = String.valueOf(response.getMinutely().get(0).getPrecipitation());
         Assertions.assertEquals(params.get("precipitation"), convert, "Wrong precipitation!");
 
-
     }
 
     @Then("hourly weather data Nr. {int} are:")
@@ -165,9 +164,20 @@ public class WeatherStepDefs {
 
     }
 
-
     @Then("hourly weather condition Nr. {int} is:")
     public void check_hourly_condition(int index, Map<String, String> params) {
+
+        convert = String.valueOf(response.getHourly().get(0).getWeather().get(0).getId());
+        Assertions.assertEquals(params.get("id"), convert, "Wrong weather id!");
+
+        convert = String.valueOf(response.getHourly().get(0).getWeather().get(0).getMain());
+        Assertions.assertEquals(params.get("main"), convert, "Wrong weather main!");
+
+        convert = String.valueOf(response.getHourly().get(0).getWeather().get(0).getDescription());
+        Assertions.assertEquals(params.get("description"), convert, "Wrong weather description!");
+
+        convert = String.valueOf(response.getHourly().get(0).getWeather().get(0).getIcon());
+        Assertions.assertEquals(params.get("icon"), convert, "Wrong weather icon!");
 
     }
 
@@ -177,7 +187,6 @@ public class WeatherStepDefs {
         Assertions.assertEquals(params.get("pop"), response.getHourly().get(0).getPop(), "Wrong pop!");
 
     }
-//
 
     @Then("day data Nr. {int} are:")
     public void check_day_data(int index, Map<String, String> params) {
@@ -269,9 +278,20 @@ public class WeatherStepDefs {
 
     }
 
-    @Then("day weather condition is:")
-    public void check_day_condition(Map<String, String> params) {
+    @Then("day weather condition Nr. {int} is:")
+    public void check_day_condition(int index, Map<String, String> params) {
 
+        convert = String.valueOf(response.getDaily().get(0).getWeather().get(0).getId());
+        Assertions.assertEquals(params.get("id"), convert, "Wrong weather id!");
+
+        convert = String.valueOf(response.getDaily().get(0).getWeather().get(0).getMain());
+        Assertions.assertEquals(params.get("main"), convert, "Wrong weather main!");
+
+        convert = String.valueOf(response.getDaily().get(0).getWeather().get(0).getDescription());
+        Assertions.assertEquals(params.get("description"), convert, "Wrong weather description!");
+
+        convert = String.valueOf(response.getDaily().get(0).getWeather().get(0).getIcon());
+        Assertions.assertEquals(params.get("icon"), convert, "Wrong weather icon!");
 
     }
 
@@ -290,12 +310,28 @@ public class WeatherStepDefs {
         convert = String.valueOf(response.getDaily().get(0).getUvi());
         Assertions.assertEquals(params.get("ultraviolet"), convert, "Wrong day uvi!");
 
-
     }
 
-    //
     @Then("alert Nr. {int} received:")
     public void check_alert(int index, Map<String, String> params) {
+
+        convert = String.valueOf(response.getAlerts().get(0).getSenderName());
+        Assertions.assertEquals(params.get("sender"), convert, "Wrong sender name!");
+
+        convert = String.valueOf(response.getAlerts().get(0).getEvent());
+        Assertions.assertEquals(params.get("event"), convert, "Wrong event name!");
+
+        convert = String.valueOf(response.getAlerts().get(0).getStart());
+        Assertions.assertEquals(params.get("start"), convert, "Wrong start date / time!");
+
+        convert = String.valueOf(response.getAlerts().get(0).getEnd());
+        Assertions.assertEquals(params.get("end"), convert, "Wrong end date / time!");
+
+        convert = String.valueOf(response.getAlerts().get(0).getDescription());
+        Assertions.assertEquals(params.get("description"), convert, "Wrong description!");
+
+        convert = String.valueOf(response.getAlerts().get(0).getTags());
+        Assertions.assertEquals(params.get("tags"), convert, "Wrong tags!");
 
     }
 
