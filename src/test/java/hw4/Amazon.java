@@ -1,4 +1,4 @@
-package HW_4;
+package hw4;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,6 +26,7 @@ public class Amazon {
     private final By REVIEWS_COUNT_DISPLAYED = By.xpath(".//div[@id= 'filter-info-section']/div");
     private final By EVERY_REVIEW_BLOCK = By.xpath(".//div[contains(@id,  '-review-card')]");
     private final By NEXT_PAGE_LINK = By.xpath(".//li[@class = 'a-last']/a");
+    private final By FIRST_REVIEW_CONTENT = By.xpath(".//div[@data-hook='review']//span[@class = 'a-profile-name']");
 //    private final By NEXT_PAGE_AVAILABLE = By.xpath(".//li[@class = 'a-last']");
 //    private final By NO_NEXT_PAGE_LINK = By.xpath(".//li[@class = 'a-disabled a-last']");
 
@@ -38,6 +39,7 @@ public class Amazon {
     String reviewsDisplayedToPrint;
     String reviewsCountedToPrint;
     int reviewsCounted;
+    String commentator;
 
     @Test
     public void amazonBooks() {
@@ -69,8 +71,8 @@ public class Amazon {
         ratingsInMenuFull = (ratingsInMenu + " ratings");
         starsInMenu = (menuStars.get(3).getAttribute("title"));
 
-        List<WebElement> itemlinks = browser.findElements(ITEM_LINK);
-        itemlinks.get(7).click();       // 4 = 7 - because of 2 links per item
+        List<WebElement> itemLinks = browser.findElements(ITEM_LINK);
+        itemLinks.get(7).click();       // 4 = 7 - because of 2 links per item
 
 
         //----------- Working with book Nr. 4 (on Book's page) -------------
@@ -101,6 +103,7 @@ public class Amazon {
 
         for (int i = 0; i < 100000; i++) {              //page change routine (max - 100000 pages)
             List<WebElement> reviewInList = browser.findElements(EVERY_REVIEW_BLOCK);
+            commentator = browser.findElement(FIRST_REVIEW_CONTENT).getText();
             for (WebElement we : reviewInList) {        //reviews counting on page routine
                 reviewsCounted = reviewsCounted + 1;
                 System.out.println(reviewsCounted);
