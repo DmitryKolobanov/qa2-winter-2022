@@ -30,17 +30,17 @@ Feature: Weather forecast
       | degrees | 360   |
       | gust    | 13.89 |
 
-    And current weather condition is:
-      | id          | 802              |
-      | main        | Clouds           |
-      | description | scattered clouds |
-      | icon        | 03d              |
+    And current weather condition Nr. 1 is:
+      | id          | 802             |
+      | main        | Clouds          |
+      | description | scatteredclouds |
+      | icon        | 03d             |
 #
-    And minutely data is:
+    And minutely data Nr. 1 are:
       | time          | 1646318700 |
       | precipitation | 0          |
 #
-    And hourly weather data is:
+    And hourly weather data Nr. 1 are:
       | time        | 1646316000 |
       | temperature | 281.94     |
       | feeling     | 278.49     |
@@ -50,13 +50,11 @@ Feature: Weather forecast
       | ultraviolet | 1.49       |
       | clouds      | 52         |
       | visibility  | 10000      |
+      | speed       | 7.16       |
+      | degrees     | 313        |
+      | gust        | 10.71      |
 
-    And hourly wind is:
-      | speed   | 7.16  |
-      | degrees | 313   |
-      | gust    | 10.71 |
-
-    And hourly weather condition is:
+    And hourly weather condition Nr. 1 is:
       | id          | 803           |
       | main        | Clouds        |
       | description | broken clouds |
@@ -65,7 +63,7 @@ Feature: Weather forecast
     And probability of precipitation is:
       | pop | 0.03 |
 #
-    And day data is:
+    And day data Nr. 1 are:
       | time      | 1646326800 |
       | sunrise   | 1646306882 |
       | sunset    | 1646347929 |
@@ -73,26 +71,26 @@ Feature: Weather forecast
       | moonset   | 1646352120 |
       | moonphase | 0.03       |
 
-    And day temperature is:
-      | day     | 281.63 |
+    And day temperature for day Nr. 1 is:
+      | daytemp | 281.63 |
       | minimum | 271.72 |
       | maximum | 282.21 |
       | night   | 271.72 |
       | evening | 277.99 |
       | morning | 280.92 |
 
-    And day feeling is like:
-      | day     | 277.83 |
+    And day feeling for day Nr. 1 is like:
+      | dayfeel | 277.83 |
       | night   | 264.72 |
       | evening | 273.35 |
       | morning | 277.66 |
 
-    And day air data is:
+    And day air data for day Nr. 1 are:
       | pressure | 1016   |
       | humidity | 55     |
       | dew      | 273.12 |
 
-    And day wind is:
+    And day wind for day Nr. 1 is:
       | speed   | 9.29  |
       | degrees | 3     |
       | gust    | 16.48 |
@@ -103,7 +101,7 @@ Feature: Weather forecast
       | description | light rain |
       | icon        | 10d        |
 
-    And day sky condition is:
+    And day sky condition for day Nr. 1 is:
       | clouds      | 49   |
       | pop         | 0.25 |
       | rain        | 0.11 |
