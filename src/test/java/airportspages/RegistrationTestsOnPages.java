@@ -1,15 +1,13 @@
-package AirportsPages;
+package airportspages;
 
-import AirportsPages.pages.ConfirmPage;
-import AirportsPages.pages.HomePage;
-import AirportsPages.pages.PassengerInfoPage;
-import AirportsPages.pages.SeatSelectPage;
+import airportspages.pages.ConfirmPage;
+import airportspages.pages.HomePage;
+import airportspages.pages.PassengerInfoPage;
+import airportspages.pages.SeatSelectPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import pageobject.model.Passenger;
+import airportspages.model.Passenger;
 
 public class RegistrationTestsOnPages {
     private final String URL = "http://www.qaguru.lv:8089/tickets/";

@@ -1,9 +1,9 @@
-package AirportsPages.pages;
+package airportspages.pages;
 
-import AirportsPages.BaseFunc;
+import airportspages.BaseFunc;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
-import pageobject.model.Passenger;
+import airportspages.model.Passenger;
 
 public class PassengerInfoPage {
     private final By FIRST_NAME = By.id("name");

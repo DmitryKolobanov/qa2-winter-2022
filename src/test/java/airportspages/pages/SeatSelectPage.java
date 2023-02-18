@@ -1,6 +1,6 @@
-package AirportsPages.pages;
+package airportspages.pages;
 
-import AirportsPages.BaseFunc;
+import airportspages.BaseFunc;
 import org.openqa.selenium.By;
 
 public class SeatSelectPage {

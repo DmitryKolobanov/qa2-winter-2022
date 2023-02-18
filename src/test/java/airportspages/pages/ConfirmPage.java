@@ -1,7 +1,6 @@
-package AirportsPages.pages;
+package airportspages.pages;
 
-import AirportsPages.BaseFunc;
-import org.junit.jupiter.api.Assertions;
+import airportspages.BaseFunc;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 
@@ -30,5 +29,4 @@ public class ConfirmPage {
         String confirmationText = baseFunc.findElement(RESERVATION_COMPLETED).getText();
         return confirmationText.equals(confirmPageText);
     }
-
 }

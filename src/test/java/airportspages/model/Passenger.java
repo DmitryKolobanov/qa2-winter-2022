@@ -1,4 +1,4 @@
-package AirportsPages.model;
+package airportspages.model;
 
 public class Passenger {
     private String firstName;
