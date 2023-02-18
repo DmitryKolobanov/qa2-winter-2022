@@ -1,6 +1,6 @@
-package SsCom.pages;
+package sscom.pages;
 
-import SsCom.BaseFunc;
+import sscom.BaseFunc;
 
 import org.openqa.selenium.By;
 

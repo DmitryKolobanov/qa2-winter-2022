@@ -1,4 +1,4 @@
-package SsCom.model;
+package sscom.model;
 
 public class Filter {
     private String manufacturer;

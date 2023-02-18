@@ -1,12 +1,11 @@
-package SsCom;
+package sscom;
 
-import SsCom.pages.CarSelectPage;
-import SsCom.pages.HomePage;
+import sscom.pages.CarSelectPage;
+import sscom.pages.HomePage;
 import org.junit.jupiter.api.Test;
 
-public class SsComSearch {
+public class ssComSearch {
     private final String URL = "http://www.ss.lv/";
-//    private final String CLUB_TIMETABLE = "https://www.myfitness.lv/club/sky-more/nodarbibu-saraksts/";
 
     private BaseFunc baseFunc = new BaseFunc();
 
