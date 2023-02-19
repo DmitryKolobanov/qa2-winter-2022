@@ -1,19 +1,20 @@
 Feature: Tickets reservation online
 
   Scenario: Successful ticket reservation
-    Given flight info
+
+    Given flight_info
       | destination   | SFO        |
       | departure     | RIX        |
-      | discount_code | Hacker     |
+      | discount_code | Hackers     |
       | adults        | 2          |
       | kids          | 1          |
       | bags          | 2          |
       | flight_date   | 12-05-2018 |
       | seat          | 27         |
 
-    And passenger info is:
-      | first_name | Dima  |
-      | last_name  | Kolobok |
+    And passenger_info is
+      | first_name | Dimas    |
+      | last_name  | Kolobkov |
 
     And home page opened
 
