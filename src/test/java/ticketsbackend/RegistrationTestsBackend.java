@@ -1,5 +1,6 @@
 package ticketsbackend;
 
+import ticketsbackend.model.FlightInfo;
 import ticketsbackend.model.Passenger;
 import ticketsbackend.pages.ConfirmPage;
 import ticketsbackend.pages.HomePage;
@@ -20,15 +21,19 @@ public class RegistrationTestsBackend {
 
     @Test
     public void successfulRegistrationTest() {
-        Passenger passenger = new Passenger("Dima", "Kolobok", "Hacker", 2,
-                1, 2, "12-05-2018");
+
+        Passenger passenger = new Passenger("Dimas", "Kolobkov");
+
+        FlightInfo info = new FlightInfo("RIX", "SFO", "Hackers", 2, 1, 2, "12-05-2018", "27");
+        info.setPassenger(passenger);
 
         baseFunc.openUrl(URL);
         HomePage homePage = new HomePage(baseFunc);
         homePage.selectAirports(FROM_AIRPORT, TO_AIRPORT);
 
         PassengerInfoPage infoPage = new PassengerInfoPage(baseFunc);
-        infoPage.fillInPassengerInfo(passenger);
+        infoPage.fillInPassengerInfo(info);
+
 
         Assertions.assertEquals(passenger.getFirstName(), infoPage.getPassengerName(), "Wrong passenger name!");
         Assertions.assertEquals(FROM_AIRPORT, infoPage.getFirstFromAirport(), "Incorrect FROM airport before " +
@@ -54,7 +59,7 @@ public class RegistrationTestsBackend {
         seatSelectPage.clickLastBook();              //proceed to final page
 
         ConfirmPage confirmPage = new ConfirmPage(baseFunc);
-        Assertions.assertTrue(confirmPage.isConfirmationPageLoaded(),  "Page not found!");
+        Assertions.assertTrue(confirmPage.isConfirmationPageLoaded(), "Page not found!");
         Assertions.assertTrue(confirmPage.isConfirmationAccepted(), "Wrong registration text");
 
     }

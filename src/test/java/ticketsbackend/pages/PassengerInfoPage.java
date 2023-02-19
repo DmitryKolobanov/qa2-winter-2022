@@ -1,7 +1,7 @@
 package ticketsbackend.pages;
 
 import ticketsbackend.BaseFunc;
-import ticketsbackend.model.Passenger;
+import ticketsbackend.model.FlightInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 
@@ -22,14 +22,14 @@ public class PassengerInfoPage {
     public PassengerInfoPage(BaseFunc baseFunc) {
         this.baseFunc = baseFunc;
     }
-    public void fillInPassengerInfo(Passenger passenger)   {
-        baseFunc.type(FIRST_NAME, passenger.getFirstName());
-        baseFunc.type(LAST_NAME, passenger.getLastName());
-        baseFunc.type(DISCOUNT, passenger.getDiscount());
-        baseFunc.type(ADULTS, passenger.getPeopleCount());
-        baseFunc.type(CHILDREN, passenger.getChildCount());
-        baseFunc.type(BAG, passenger.getBagCount());
-        baseFunc.selectByText(FLIGHT, passenger.getDate());
+    public void fillInPassengerInfo(FlightInfo info)   {
+        baseFunc.type(FIRST_NAME, info.getPassenger().getFirstName());
+        baseFunc.type(LAST_NAME, info.getPassenger().getLastName());
+        baseFunc.type(DISCOUNT, info.getDiscount());
+        baseFunc.type(ADULTS, info.getAdultsCount());
+        baseFunc.type(CHILDREN, info.getChildCount());
+        baseFunc.type(BAG, info.getBagsCount());
+        baseFunc.selectByText(FLIGHT, info.getFlightDate());
         baseFunc.click(GET_PRICE_BTN);
         baseFunc.waitForElementsCountToBe(DATA_ON_FORM, 5);
     }
