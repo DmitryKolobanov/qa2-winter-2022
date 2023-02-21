@@ -1,5 +1,6 @@
 package ticketsbackend;
 
+import org.junit.jupiter.api.AfterEach;
 import ticketsbackend.model.FlightInfo;
 import ticketsbackend.model.Passenger;
 import ticketsbackend.pages.ConfirmPage;
@@ -22,7 +23,7 @@ public class RegistrationTestsBackend {
     @Test
     public void successfulRegistrationTest() {
 
-        Passenger passenger = new Passenger("Dimas", "Kolobkov");
+        Passenger passenger = new Passenger("Dimon", "Kolobkov");
 
         FlightInfo info = new FlightInfo("RIX", "SFO", "Hackers", 2, 1, 2, "12-05-2018", "27");
         info.setPassenger(passenger);
@@ -33,6 +34,7 @@ public class RegistrationTestsBackend {
 
         PassengerInfoPage infoPage = new PassengerInfoPage(baseFunc);
         infoPage.fillInPassengerInfo(info);
+        infoPage.getTicketPrice();
 
 
         Assertions.assertEquals(passenger.getFirstName(), infoPage.getPassengerName(), "Wrong passenger name!");
@@ -46,7 +48,6 @@ public class RegistrationTestsBackend {
                 " Price' pressed!");
 
         Assertions.assertTrue(infoPage.getPrice().length() > 0, "No price received!");
-
 
         infoPage.clickSBookBtn();                   //proceed to seat select
 
@@ -63,8 +64,8 @@ public class RegistrationTestsBackend {
         Assertions.assertTrue(confirmPage.isConfirmationAccepted(), "Wrong registration text");
 
     }
-//    @AfterEach
-//    public void closeBrowser() {
-//        baseFunc.closeBrowser();
-//    }
+    @AfterEach
+    public void closeBrowser() {
+        baseFunc.closeBrowser();
+    }
 }

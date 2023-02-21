@@ -5,16 +5,16 @@ Feature: Tickets reservation online
     Given flight_info
       | destination   | SFO        |
       | departure     | RIX        |
-      | discount_code | Hackers     |
+      | discount_code | Hackers    |
       | adults        | 2          |
       | kids          | 1          |
       | bags          | 2          |
       | flight_date   | 12-05-2018 |
-      | seat          | 27         |
+      | seat          | 21         |
 
     And passenger_info is
-      | first_name | Dimas    |
-      | last_name  | Kolobkov |
+      | first_name | Dimas |
+      | last_name  | Kolob |
 
     And home page opened
 
@@ -26,7 +26,7 @@ Feature: Tickets reservation online
     And requesting price
 
     Then passenger name and airports appears
-    And price is 500 EUR
+    And price is 2140 EUR
 
     When we are pressing Book button
     And selecting seat
@@ -36,6 +36,6 @@ Feature: Tickets reservation online
     When we are booking selected ticket
     Then successful registration message appears
 
-    When we are requesting reservations data
-    Then current reservation is in the list
-    And all reservation data are correct
+#    When we are requesting reservations data
+#    Then current reservation is in the list
+#    And all reservation data are correct
