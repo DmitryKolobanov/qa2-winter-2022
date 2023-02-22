@@ -13,8 +13,8 @@ Feature: Tickets reservation online
       | seat          | 21         |
 
     And passenger_info is
-      | first_name | Dimas |
-      | last_name  | Kolob |
+      | first_name | random |
+      | last_name  | Kolob  |
 
     And home page opened
 
@@ -36,6 +36,6 @@ Feature: Tickets reservation online
     When we are booking selected ticket
     Then successful registration message appears
 
-#    When we are requesting reservations data
-#    Then current reservation is in the list
-#    And all reservation data are correct
+    When we are requesting reservations data
+    Then current reservation is in the list
+    And all reservation data are correct
