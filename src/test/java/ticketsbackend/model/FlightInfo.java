@@ -8,10 +8,10 @@ public class FlightInfo {
     private int childCount;
     private int bagsCount;
     private String flightDate;
-    private String seatNr;
+    private int seatNr;
     private Passenger passenger;
 
-    public FlightInfo(String destination, String departure, String discount, int adultsCount, int childCount, int bagsCount, String flightDate, String seatNr) {
+    public FlightInfo(String destination, String departure, String discount, int adultsCount, int childCount, int bagsCount, String flightDate, int seatNr) {
         this.destination = destination;
         this.departure = departure;
         this.discount = discount;
@@ -78,11 +78,11 @@ public class FlightInfo {
         this.flightDate = flightDate;
     }
 
-    public String getSeatNr() {
+    public int getSeatNr() {
         return seatNr;
     }
 
-    public void setSeatNr(String seatNr) {
+    public void setSeatNr(int seatNr) {
         this.seatNr = seatNr;
     }
 

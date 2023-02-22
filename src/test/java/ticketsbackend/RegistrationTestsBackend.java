@@ -16,7 +16,8 @@ public class RegistrationTestsBackend {
     private final String TO_AIRPORT = "SFO";
 
 
-    String seatNumber;
+    private String seatNumber;
+    private int seatPosition = 27;
 
     private BaseFunc baseFunc = new BaseFunc();
 
@@ -25,7 +26,7 @@ public class RegistrationTestsBackend {
 
         Passenger passenger = new Passenger("Dimon", "Kolobkov");
 
-        FlightInfo info = new FlightInfo("RIX", "SFO", "Hackers", 2, 1, 2, "12-05-2018", "27");
+        FlightInfo info = new FlightInfo("RIX", "SFO", "Hackers", 2, 1, 2, "12-05-2018", 27);
         info.setPassenger(passenger);
 
         baseFunc.openUrl(URL);
@@ -52,8 +53,8 @@ public class RegistrationTestsBackend {
         infoPage.clickSBookBtn();                   //proceed to seat select
 
         SeatSelectPage seatSelectPage = new SeatSelectPage(baseFunc);
-        seatNumber = seatSelectPage.getSeatNumber();
-        seatSelectPage.clickSelectedSeat();
+        seatNumber = Integer.toString(seatPosition);
+        seatSelectPage.clickSeatByNumber(seatNumber);
         Assertions.assertEquals(seatNumber, seatSelectPage.getSelectedSeat(), "Seat numbers are " +
                 "different!");
 
