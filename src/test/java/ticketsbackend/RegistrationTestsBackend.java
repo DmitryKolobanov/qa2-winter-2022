@@ -17,7 +17,7 @@ public class RegistrationTestsBackend {
 
 
     private String seatNumber;
-    private int seatPosition = 27;
+    private int seatPosition = 19;
 
     private BaseFunc baseFunc = new BaseFunc();
 

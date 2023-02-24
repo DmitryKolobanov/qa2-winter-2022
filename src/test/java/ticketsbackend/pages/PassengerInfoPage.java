@@ -22,11 +22,7 @@ public class PassengerInfoPage {
     public PassengerInfoPage(BaseFunc baseFunc) {
         this.baseFunc = baseFunc;
     }
-    public void fillInPax(FlightInfo info) {
-        baseFunc.type(FIRST_NAME, info.getPassenger().getFirstName());
-        baseFunc.type(LAST_NAME, info.getPassenger().getLastName());
-    }
-    public void fillInPassengerInfo(FlightInfo info)   {
+       public void fillInPassengerInfo(FlightInfo info)   {
         baseFunc.type(FIRST_NAME, info.getPassenger().getFirstName());
         baseFunc.type(LAST_NAME, info.getPassenger().getLastName());
         baseFunc.type(DISCOUNT, info.getDiscount());
